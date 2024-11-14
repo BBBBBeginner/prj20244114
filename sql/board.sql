@@ -12,3 +12,4 @@ CREATE TABLE board
 
 SELECT *
 FROM board;
+
