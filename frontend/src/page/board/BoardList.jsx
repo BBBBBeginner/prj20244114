@@ -23,7 +23,7 @@ export function BoardList() {
       <h3>게시물 목록</h3>
       <Table.Root interactive>
         <Table.Header>
-          <Table.Row onClick={() => handleRowClick(board.id)} key={board.key}>
+          <Table.Row>
             <Table.ColumnHeader>번호</Table.ColumnHeader>
             <Table.ColumnHeader>제목</Table.ColumnHeader>
             <Table.ColumnHeader>작성자</Table.ColumnHeader>
@@ -32,7 +32,7 @@ export function BoardList() {
         </Table.Header>
         <Table.Body>
           {boardList.map((board) => (
-            <Table.Row key={board.id}>
+            <Table.Row onClick={() => handleRowClick(board.id)} key={board.id}>
               <Table.Cell>{board.id}</Table.Cell>
               <Table.Cell>{board.title}</Table.Cell>
               <Table.Cell>{board.writer}</Table.Cell>
