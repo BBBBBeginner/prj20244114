@@ -36,4 +36,8 @@ public class BoardService {
 
         return title && content;
     }
+
+    public void remove(int id) {
+        mapper.deleteById(id);
+    }
 }
