@@ -1,4 +1,5 @@
 # 게시물 테이블 생성
+USE prj20241114;
 
 CREATE TABLE board
 (
