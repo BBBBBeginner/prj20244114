@@ -39,9 +39,9 @@ public interface BoardMapper {
 
 
     @Update("""
-            Update board
+            UPDATE board
             SET title=#{title}, content=#{content}
-            WHERE id=#{id};
+            WHERE id=#{id}
             """)
-    void update(Board board);
+    int update(Board board);
 }
