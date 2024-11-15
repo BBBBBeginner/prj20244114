@@ -18,14 +18,21 @@ public class BoardController {
 
     @PutMapping("update")
     public ResponseEntity<Map<String, Object>> update(@RequestBody Board board) {
-        if (service.update(board)) {
-            return ResponseEntity.ok()
-                    .body(Map.of("message", Map.of("type", "success",
-                            "text", STR."\{board.getId()}번 게시물이 수정되었습니다.")));
+        if (service.validate(board)) {
+            if (service.update(board)) {
+                return ResponseEntity.ok()
+                        .body(Map.of("message", Map.of("type", "success",
+                                "text", STR."\{board.getId()}번 게시물이 수정되었습니다.")));
+            } else {
+                return ResponseEntity.internalServerError()
+                        .body(Map.of("message", Map.of("type", "error",
+                                "text", STR."\{board.getId()}번 게시물이 수정되지 않았습니다.")));
+            }
+
         } else {
-            return ResponseEntity.internalServerError()
-                    .body(Map.of("message", Map.of("type", "error",
-                            "text", STR."\{board.getId()}번 게시물이 수정되지 않았습니다.")));
+            return ResponseEntity.badRequest()
+                    .body(Map.of("message", Map.of("type", "warning",
+                            "text", "제목이나 본문이 비어있을 수 없습니다.")));
         }
     }
 
