@@ -23,7 +23,7 @@ public class BoardController {
                     .body(Map.of("message", Map.of("type", "success",
                             "text", STR."\{board.getId()}번 게시물이 수정되었습니다.")));
         } else {
-            return ResponseEntity.ok()
+            return ResponseEntity.internalServerError()
                     .body(Map.of("message", Map.of("type", "error",
                             "text", STR."\{board.getId()}번 게시물이 수정되지 않았습니다.")));
         }
