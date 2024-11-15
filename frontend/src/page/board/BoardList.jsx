@@ -60,6 +60,24 @@ export function BoardList() {
     setSearchParams(nextSearchParams);
   }
 
+  function handleSearchClick() {
+    if (search.keyword.trim().length > 0) {
+      // 검색
+      const nextSearchParam = new URLSearchParams(searchParams);
+      nextSearchParam.set("st", search.type);
+      nextSearchParam.set("sk", search.keyword);
+
+      setSearchParams(nextSearchParam);
+    } else {
+      // 검색 안함
+      const nextSearchParam = new URLSearchParams(searchParams);
+      nextSearchParam.delete("st");
+      nextSearchParam.delete("sk");
+
+      setSearchParams(nextSearchParam);
+    }
+  }
+
   return (
     <Box>
       <h3>게시물 목록</h3>
@@ -97,9 +115,12 @@ export function BoardList() {
           />
         </NativeSelectRoot>
         <Input
-          onChange={(e) => setSearch({ ...search, keyword: e.target.value })}
+          value={search.keyword}
+          onChange={(e) =>
+            setSearch({ ...search, keyword: e.target.value.trim() })
+          }
         />
-        <Button>검색</Button>
+        <Button onClick={handleSearchClick}>검색</Button>
       </HStack>
 
       <PaginationRoot
