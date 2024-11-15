@@ -6,16 +6,14 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 @Mapper
-
 public interface BoardMapper {
     @Insert("""
             INSERT INTO board
             (title, content, writer)
-            Values(#{title}, #{content}, #{writer});
+            VALUES (#{title}, #{content}, #{writer})
             """)
     @Options(keyProperty = "id", useGeneratedKeys = true)
     int insert(Board board);
-
 
     @Select("""
             SELECT id, title, writer, inserted
@@ -27,36 +25,47 @@ public interface BoardMapper {
     @Select("""
             SELECT *
             FROM board
-            WHERE id = #{id};
+            WHERE id = #{id}
             """)
     Board selectById(int id);
 
     @Delete("""
             DELETE FROM board
-            WHERE id = #{id};
+            WHERE id = #{id}
             """)
     int deleteById(int id);
 
 
     @Update("""
             UPDATE board
-            SET title=#{title}, content=#{content}
+            SET title=#{title}, 
+                content=#{content}
             WHERE id=#{id}
             """)
     int update(Board board);
 
     @Select("""
-            SELECT id, title, writer, inserted
-            FROM board
-            ORDER BY id DESC
-            LIMIT #{offset}, 10
+            <script>
+                SELECT id, title, writer, inserted
+                FROM board
+                WHERE 
+                    <trim prefixOverrides="OR">
+                        <if test="searchType == 'all' or searchType == 'title'">
+                            title LIKE CONCAT('%', #{keyword}, '%')
+                        </if>
+                        <if test="searchType == 'all' or searchType == 'content'">
+                         OR content LIKE CONCAT('%', #{keyword}, '%')
+                        </if>
+                    </trim>
+            
+                ORDER BY id DESC
+                LIMIT #{offset}, 10
+            </script>
             """)
-    List<Board> selectPage(Integer offset);
+    List<Board> selectPage(Integer offset, String searchType, String keyword);
 
     @Select("""
             SELECT COUNT(*) FROM board
             """)
     Integer countAll();
-
-
 }

@@ -63,7 +63,7 @@ public class BoardController {
         System.out.println(searchType);
         System.out.println(keyword);
 
-        return service.list(page);
+        return service.list(page, searchType, keyword);
     }
 
     @PostMapping("add")
