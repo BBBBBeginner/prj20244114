@@ -8,7 +8,7 @@ import { MemberSignup } from "./page/member/MemberSignup.jsx";
 import { MemberList } from "./page/member/MemberList.jsx";
 import React from "react";
 import { MemberInfo } from "./page/member/MemberInfo.jsx";
-import { MembereEdit } from "./page/member/MembereEdit.jsx";
+import { MemberEdit } from "./page/member/MemberEdit.jsx";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         path: "member/:id",
         element: <MemberInfo />,
       },
-      { path: "member/edit/:id", element: <MembereEdit /> },
+      { path: "member/edit/:id", element: <MemberEdit /> },
     ],
   },
 ]);
