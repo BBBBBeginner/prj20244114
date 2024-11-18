@@ -8,6 +8,7 @@ import { MemberSignup } from "./page/member/MemberSignup.jsx";
 import { MemberList } from "./page/member/MemberList.jsx";
 import React from "react";
 import { MemberInfo } from "./page/member/MemberInfo.jsx";
+import { MembereEdit } from "./page/member/MembereEdit.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
         path: "member/:id",
         element: <MemberInfo />,
       },
-      { path: "member/edit/:id", element: <div>회원정보 수정</div> },
+      { path: "member/edit/:id", element: <MembereEdit /> },
     ],
   },
 ]);

@@ -71,6 +71,9 @@ export function BoardView() {
         </Field>
 
         <Box>
+          <Button onClick={() => navigate(`/member/edit/${id}`)}>
+            수정버튼
+          </Button>
           <DialogRoot>
             <DialogTrigger asChild>
               <Button colorPalette={"red"} variant={"outline"}>
