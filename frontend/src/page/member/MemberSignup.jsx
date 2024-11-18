@@ -8,14 +8,16 @@ import { useNavigate } from "react-router-dom";
 
 export function MemberSignup() {
   const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [description, setDescription] = useState("");
   const [idCheck, setIdCheck] = useState(false);
+  const [passwordCheck, setPasswordCheck] = useState("");
   const navigate = useNavigate();
 
   function handleSaveClick() {
     axios
-      .post("/api/member/signup", { id, password, description })
+      .post("/api/member/signup", { id, email, password, description })
       .then((res) => {
         console.log("잘됨, 페이지 이동, 토스트 출력");
 
@@ -64,7 +66,12 @@ export function MemberSignup() {
 
   // 가입 버튼 비활성화 여부
   let disabled = true;
-  disabled = !idCheck;
+
+  if (idCheck) {
+    if (password === passwordCheck) {
+      disabled = false;
+    }
+  }
 
   return (
     <Box>
@@ -72,16 +79,31 @@ export function MemberSignup() {
       <Stack gap={5}>
         <Field label={"아이디"}>
           <Group attached w={"100%"}>
-            <Input value={id} onChange={(e) => setId(e.target.value)} />
+            <Input
+              value={id}
+              onChange={(e) => {
+                setIdCheck(false);
+                setId(e.target.value);
+              }}
+            />
             <Button onClick={handleIdCheckClick} variant={"outline"}>
               중복확인
             </Button>
           </Group>
         </Field>
+        <Field label={"이메일"}>
+          <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+        </Field>
         <Field label={"암호"}>
           <Input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+        </Field>
+        <Field label={"암호확인"}>
+          <Input
+            value={passwordCheck}
+            onChange={(e) => setPasswordCheck(e.target.value)}
           />
         </Field>
         <Field label={"자기소개"}>
