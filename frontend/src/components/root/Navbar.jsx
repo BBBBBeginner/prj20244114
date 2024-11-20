@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Box, Flex } from "@chakra-ui/react";
 import { useContext } from "react";
-import { AuthenticationContext } from "../../App.jsx";
+import { AuthenticationContext } from "../context/AuthenticationProvider.jsx";
 
 export function Navbar() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export function Navbar() {
       <Box onClick={() => navigate("/member/login")}>로그인</Box>
       <Box
         onClick={() => {
-          localStorage.removeItem("token");
+          authentication.logout();
           navigate("/member/login");
         }}
       >
