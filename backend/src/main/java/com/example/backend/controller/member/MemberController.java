@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -70,9 +72,15 @@ public class MemberController {
     }
 
     @GetMapping("{id}")
-    public Member getMember(@PathVariable String id) {
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Member> getMember(@PathVariable String id, Authentication auth) {
 
-        return service.get(id);
+        if (service.hasAccess(id, auth)) {
+            return ResponseEntity.ok(service.get(id));
+        } else {
+            return ResponseEntity.status(403).build();
+        }
+
     }
 
 
