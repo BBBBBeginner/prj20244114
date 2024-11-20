@@ -28,7 +28,7 @@ public class AppConfiguration {
     @Value("classpath:secret/app.pub")
     RSAPublicKey pub;
 
-    @Value("classpath:secret/app.key")
+    @Value("classpath:app.key")
     RSAPrivateKey priv;
 
 
