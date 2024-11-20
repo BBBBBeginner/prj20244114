@@ -29,7 +29,6 @@ function AuthenticationProvider({ children }) {
   const isAuthenticated = Date.now() < userToken.exp * 1000;
   let isAdmin = false;
 
-  console.log(userToken);
   if (userToken.scope) {
     isAdmin = userToken.scope.split(" ").includes("admin");
   }
