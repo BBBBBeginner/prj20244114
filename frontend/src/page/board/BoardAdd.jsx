@@ -9,7 +9,6 @@ import { toaster } from "../../components/ui/toaster.jsx";
 export function BoardAdd() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [writer, setWriter] = useState("");
   const [progress, setProgress] = useState(false);
 
   const navigate = useNavigate();
@@ -18,11 +17,18 @@ export function BoardAdd() {
     setProgress(true);
 
     axios
-      .post("/api/board/add", {
-        title,
-        content,
-        writer,
-      })
+      .post(
+        "/api/board/add",
+        {
+          title,
+          content,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      )
       .then((res) => res.data)
       .then((data) => {
         const message = data.message;
@@ -48,6 +54,7 @@ export function BoardAdd() {
   };
 
   const disabled = !(title.trim().length > 0 && content.trim().length > 0);
+
   return (
     <Box>
       <h3>게시물 작성</h3>
@@ -61,12 +68,10 @@ export function BoardAdd() {
             onChange={(e) => setContent(e.target.value)}
           />
         </Field>
-        <Field label={"작성자"}>
-          <Input value={writer} onChange={(e) => setWriter(e.target.value)} />
-        </Field>
+
         <Box>
           <Button
-            disable={disabled}
+            disabled={disabled}
             loading={progress}
             onClick={handleSaveClick}
           >
