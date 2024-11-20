@@ -67,7 +67,7 @@ public interface BoardMapper {
     @Select("""
             <script>
             SELECT COUNT(*) FROM board
-            WHERE 
+            WHERE
                 <trim prefixOverrides="OR">
                     <if test="searchType == 'all' or searchType == 'title'">
                         title LIKE CONCAT('%', #{keyword}, '%')

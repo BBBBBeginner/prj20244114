@@ -14,3 +14,7 @@ DESC member;
 
 SELECT *
 FROM member;
+
+
+INSERT INTO member (id, password, email)
+VALUES ('trump', 'password123', 'trump@example.com');
