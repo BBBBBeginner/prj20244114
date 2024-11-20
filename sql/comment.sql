@@ -2,11 +2,14 @@ USE prj20241114;
 
 CREATE TABLE comment
 (
-    board_id  INT,
-    member_id VARCHAR(20)  NOT NULL,
-    comment   VARCHAR(500) Not NULL,
+    id        INT PRIMARY KEY AUTO_INCREMENT,
+    board_id  INT          NOT NULL REFERENCES board (id),
+    member_id VARCHAR(20)  NOT NULL REFERENCES member (id),
+    comment   VARCHAR(500) NOT NULL,
     inserted  DATETIME     NOT NULL DEFAULT NOW()
 );
+
+DROP TABLE comment;
 
 SELECT *
 FROM comment;
