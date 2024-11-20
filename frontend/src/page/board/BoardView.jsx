@@ -1,29 +1,27 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { Box, Input, Spinner, Stack, Textarea } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { Field } from "../../components/ui/field.jsx";
+import { Button } from "../../components/ui/button.jsx";
+import { toaster } from "../../components/ui/toaster.jsx";
 import {
-  Box,
   DialogActionTrigger,
   DialogBody,
   DialogContent,
   DialogFooter,
   DialogHeader,
+  DialogRoot,
   DialogTitle,
   DialogTrigger,
-  Input,
-  Spinner,
-  Stack,
-  Textarea,
-} from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Field } from "../../components/ui/field.jsx";
-import { Button } from "../../components/ui/button.jsx";
-import { toaster } from "../../components/ui/toaster.jsx";
-import { DialogRoot } from "../../components/ui/dialog.jsx";
+} from "../../components/ui/dialog.jsx";
+import { AuthenticationContext } from "../../components/context/AuthenticationProvider.jsx";
 
 export function BoardView() {
   const { id } = useParams();
   const [board, setBoard] = useState(null);
   const navigate = useNavigate();
+  const { hasAccess } = useContext(AuthenticationContext);
 
   useEffect(() => {
     axios.get(`/api/board/view/${id}`).then((res) => setBoard(res.data));
@@ -69,42 +67,39 @@ export function BoardView() {
         <Field label="작성일시" readOnly>
           <Input value={board.inserted} type={"datetime-local"} />
         </Field>
-
-        <Box>
-          <Button onClick={() => navigate(`/member/edit/${id}`)}>
-            수정버튼
-          </Button>
-          <DialogRoot>
-            <DialogTrigger asChild>
-              <Button colorPalette={"red"} variant={"outline"}>
-                삭제
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>삭제 확인</DialogTitle>
-              </DialogHeader>
-              <DialogBody>
-                <p>{board.id}번 게시물을 삭제하겠습니까?</p>
-              </DialogBody>
-              <DialogFooter>
-                <DialogActionTrigger>
-                  <Button variant={"outline"}>취소</Button>
-                </DialogActionTrigger>
-                <Button colorPalette={"red"} onClick={handleDeleteClick}>
+        {hasAccess(board.writer) && (
+          <Box>
+            <DialogRoot>
+              <DialogTrigger asChild>
+                <Button colorPalette={"red"} variant={"outline"}>
                   삭제
                 </Button>
-              </DialogFooter>
-            </DialogContent>
-          </DialogRoot>
-
-          <Button
-            colorPalette={"cyan"}
-            onClick={() => navigate(`/edit/${board.id}`)}
-          >
-            수정
-          </Button>
-        </Box>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>삭제 확인</DialogTitle>
+                </DialogHeader>
+                <DialogBody>
+                  <p>{board.id}번 게시물을 삭제하시겠습니까?</p>
+                </DialogBody>
+                <DialogFooter>
+                  <DialogActionTrigger>
+                    <Button variant={"outline"}>취소</Button>
+                  </DialogActionTrigger>
+                  <Button colorPalette={"red"} onClick={handleDeleteClick}>
+                    삭제
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </DialogRoot>
+            <Button
+              colorPalette={"cyan"}
+              onClick={() => navigate(`/edit/${board.id}`)}
+            >
+              수정
+            </Button>
+          </Box>
+        )}
       </Stack>
     </Box>
   );
