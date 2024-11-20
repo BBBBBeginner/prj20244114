@@ -34,6 +34,7 @@ export function Navbar() {
         </Box>
       )}
       <Box>{id}</Box>
+      <Box onClick={() => navigate(`/member/${id}`)}>{id}</Box>
     </Flex>
   );
 }
