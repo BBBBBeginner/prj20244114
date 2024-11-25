@@ -14,7 +14,7 @@ import { GoHeartFill } from "react-icons/go";
 import { CiHashtag, CiSearch } from "react-icons/ci";
 import { IoCalendar } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
-import { MyHeading } from "./MyHeading.jsx";
+import { MyHeading } from "../../components/root/MyHeading.jsx";
 
 export function BoardList() {
   const [boardList, setBoardList] = useState([]);
