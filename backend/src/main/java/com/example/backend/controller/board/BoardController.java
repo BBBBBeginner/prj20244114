@@ -21,9 +21,9 @@ public class BoardController {
 
     @PostMapping("like")
     @PreAuthorize("isAuthenticated()")
-    public void like(@RequestBody Board board,
-                     Authentication authentication) {
-        service.like(board, authentication);
+    public Map<String, Object> like(@RequestBody Board board,
+                                    Authentication authentication) {
+        return service.like(board, authentication);
     }
 
     @PutMapping("update")
