@@ -131,6 +131,7 @@ export function BoardList() {
           <Table.Body>
             {boardList.map((board) => (
               <Table.Row
+                _hover={{ cursor: "pointer" }}
                 onClick={() => handleRowClick(board.id)}
                 key={board.id}
               >
