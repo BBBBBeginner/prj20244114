@@ -1,12 +1,4 @@
-import {
-  Badge,
-  Box,
-  Center,
-  Heading,
-  HStack,
-  Input,
-  Table,
-} from "@chakra-ui/react";
+import { Badge, Box, Center, HStack, Input, Table } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -22,6 +14,7 @@ import { GoHeartFill } from "react-icons/go";
 import { CiHashtag, CiSearch } from "react-icons/ci";
 import { IoCalendar } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
+import { MyHeading } from "./MyHeading.jsx";
 
 export function BoardList() {
   const [boardList, setBoardList] = useState([]);
@@ -105,9 +98,7 @@ export function BoardList() {
 
   return (
     <Box>
-      <Heading size={{ base: "xl", md: "2xl" }} mb={7}>
-        게시물 목록
-      </Heading>
+      <MyHeading>게시물 목록</MyHeading>
 
       {boardList.length > 0 ? (
         <Table.Root interactive>
