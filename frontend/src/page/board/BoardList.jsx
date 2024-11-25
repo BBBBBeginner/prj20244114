@@ -19,8 +19,9 @@ import {
 import { Button } from "../../components/ui/button.jsx";
 import { FaCommentDots, FaImages } from "react-icons/fa6";
 import { GoHeartFill } from "react-icons/go";
-import { CiHashtag, CiSearch, CiUser } from "react-icons/ci";
+import { CiHashtag, CiSearch } from "react-icons/ci";
 import { IoCalendar } from "react-icons/io5";
+import { FaUser } from "react-icons/fa";
 
 export function BoardList() {
   const [boardList, setBoardList] = useState([]);
@@ -120,7 +121,7 @@ export function BoardList() {
                 <GoHeartFill />
               </Table.ColumnHeader>
               <Table.ColumnHeader>
-                <CiUser />
+                <FaUser />
               </Table.ColumnHeader>
               <Table.ColumnHeader hideBelow={"md"}>
                 <IoCalendar />
