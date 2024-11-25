@@ -1,10 +1,10 @@
 import { Box, Stack } from "@chakra-ui/react";
-import { Navbar } from "../../components/root/Navbar.jsx";
 import { Outlet } from "react-router-dom";
+import { Navbar } from "../../components/root/Navbar.jsx";
 
 export function RootLayout() {
   return (
-    <Stack>
+    <Stack mx={{ md: 20, lg: 40 }}>
       <Box>
         <Navbar />
       </Box>
