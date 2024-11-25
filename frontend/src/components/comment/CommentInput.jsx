@@ -11,7 +11,7 @@ export function CommentInput({ boardId, onSaveClick }) {
     <Box>
       <Group h={125} attached w={"100%"}>
         <Textarea
-          h={200}
+          h={125}
           flex={1}
           value={comment}
           disabled={!isAuthenticated}
