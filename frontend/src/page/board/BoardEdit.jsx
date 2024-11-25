@@ -2,7 +2,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   Card,
+  FormatNumber,
   HStack,
+  Icon,
   Image,
   Input,
   Spinner,
@@ -28,7 +30,7 @@ import { toaster } from "../../components/ui/toaster.jsx";
 import { AuthenticationContext } from "../../components/context/AuthenticationProvider.jsx";
 import { Switch } from "../../components/ui/switch.jsx";
 import { MyHeading } from "../../components/root/MyHeading.jsx";
-import { CiTrash } from "react-icons/ci";
+import { CiFileOn, CiTrash } from "react-icons/ci";
 
 function ImageView({ files, onRemoveSwitchClick }) {
   return (
@@ -167,9 +169,19 @@ export function BoardEdit() {
                       me={"auto"}
                       truncate
                     >
+                      <Icon>
+                        <CiFileOn />
+                      </Icon>
+
                       {file.name}
                     </Text>
-                    <Text>{Math.floor(file.size / 1024)} KB</Text>
+                    <Text>
+                      <FormatNumber
+                        value={file.size}
+                        notation={"compact"}
+                        compactDisplay="short"
+                      ></FormatNumber>
+                    </Text>
                   </HStack>
                 </Card.Body>
               </Card.Root>
