@@ -10,11 +10,11 @@ function NavbarItem({ children, ...rest }) {
   return (
     <Box
       css={{
-        paddingX: "15px",
-        paddingY: "10px",
+        paddingX: "20px",
+        paddingY: "15px",
       }}
       _hover={{
-        bgColor: "gray.300",
+        bgColor: "blue.300",
         cursor: "pointer",
       }}
       {...rest}
@@ -33,40 +33,40 @@ export function Navbar() {
   );
 
   return (
-    <Flex gap={3} mb={10}>
+    <Flex gap={3}>
       <NavbarItem onClick={() => navigate("/")}>HOME</NavbarItem>
       {isAuthenticated && (
         <NavbarItem onClick={() => navigate("/add")}>
-          <Icon hideFrom={"sm"}>
+          <Icon hideFrom={"md"}>
             <HiOutlinePencilSquare />
           </Icon>
-          <Text hideBelow={"sm"}>작성</Text>
+          <Text hideBelow={"md"}>작성</Text>
         </NavbarItem>
       )}
       <Box mx={"auto"}></Box>
       {isAuthenticated || (
         <NavbarItem onClick={() => navigate("/member/signup")}>
-          <Icon hideFrom={"sm"}>
+          <Icon hideFrom={"md"}>
             <HiOutlineUserPlus />
           </Icon>
-          <Text hideBelow={"sm"}>가입</Text>
+          <Text hideBelow={"md"}>가입</Text>
         </NavbarItem>
       )}
       {isAdmin && (
         <NavbarItem onClick={() => navigate("/member/list")}>
-          <Icon hideFrom={"sm"}>
+          <Icon hideFrom={"md"}>
             <PiAddressBookTabsThin />
           </Icon>
-          <Text hideBelow={"sm"}>회원목록</Text>
+          <Text hideBelow={"md"}>회원목록</Text>
         </NavbarItem>
       )}
 
       {isAuthenticated || (
         <NavbarItem onClick={() => navigate("/member/login")}>
-          <Icon hideFrom={"sm"}>
+          <Icon hideFrom={"md"}>
             <CiLogin />
           </Icon>
-          <Text hideBelow={"sm"}>로그인</Text>
+          <Text hideBelow={"md"}>로그인</Text>
         </NavbarItem>
       )}
       {isAuthenticated && (
@@ -76,19 +76,19 @@ export function Navbar() {
             navigate("/member/login");
           }}
         >
-          <Icon hideFrom={"sm"}>
+          <Icon hideFrom={"md"}>
             <CiLogout />
           </Icon>
-          <Text hideBelow={"sm"}>로그아웃</Text>
+          <Text hideBelow={"md"}>로그아웃</Text>
         </NavbarItem>
       )}
       {isAuthenticated && (
         <NavbarItem onClick={() => navigate(`/member/${id}`)}>
-          <Icon hideFrom={"sm"}>
+          <Icon hideFrom={"md"}>
             <CiUser />
           </Icon>
 
-          <Text hideBelow={"sm"}>{id}</Text>
+          <Text hideBelow={"md"}>{id}</Text>
         </NavbarItem>
       )}
     </Flex>
